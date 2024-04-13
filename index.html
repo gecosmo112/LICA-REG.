@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML to Sheets</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+   
+
+    <div class="container">
+        <form id="form" class="mb-2">
+        <div class="brand-logo"></div>
+        
+        <div class="brand-title">Greetings on points of the Triangle</div>
+        <div class="inputs">
+         <!-- <label class="field-label" for="key_number">Key Number</label> -->
+  
+          <input class="bg-green-100 px-2 py-1 outline-none" type="text" name="key_number" id="key_number" placeholder="Key Number">
+          <!-- <label class="field-label" for="key_number">Key Number</label> -->
+          <input class="bg-green-100 px-2 py-1 outline-none" type="text" name="first_name" id="first_name" placeholder="First Name">
+          <!-- <label class="field-label" for="key_number">Key Number</label> -->
+          <input class="bg-green-100 px-2 py-1 outline-none" type="text" name="last_name" id="last_name" placeholder="Last Name">
+          <!-- <label class="field-label" for="key_number">Key Number</label> -->
+          <input class="bg-green-100 px-2 py-1 outline-none" type="email" name="email" id="email" placeholder="Email">
+          <!-- <label class="field-label" for="key_number">Key Number</label> -->
+          <input class="bg-green-100 px-2 py-1 outline-none" type="tel" name="phone" id="phone" placeholder="Phone">
+          <!-- <label class="field-label" for="key_number">Key Number</label> -->
+
+          <input class="bg-green-100 px-2 py-1 outline-none" type="text" name="address" id="address" placeholder="Address">
+
+        <!-- <div style="display: flex; width: 80px;"> --> 
+        <div style="display: inline-flex;width: 150px; padding-top: 10px;margin-bottom: 0px;color: rgb(222, 240, 53);font-weight:800;">
+          
+          <!-- <label> -->
+            <input type="radio" name="status"value="Fr.">Fr.
+        <!-- </label> -->
+          <!-- <label> -->
+            <input type="radio" name="status" value="Sor"> Sor.
+        <!-- </label> -->
+          </div>
+          <!-- <label class="field-label" for="date">Date</label> -->
+          <button type="submit" id="submit">Submit</button>
+        </form>
+      </div>
+
+
+    
+
+    <script>
+        const form = document.querySelector("#form");
+        const submitButton = document.querySelector("#submit");
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxTgSIkz7gdQazaMvpD-txZBUupuY0rBsgRmnw6aAxnYyNEgmPl64ozN_iCVvwgZu_X/exec';
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            submitButton.disabled = true;
+
+            let requestBody = new FormData(form);
+            fetch(scriptURL, { method: 'POST', body: requestBody })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Form submitted successfully!');
+                        form.reset(); // Reset the form after successful submission
+                    } else {
+                        throw new Error('Network response was not ok.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Form submission failed. Please try again.');
+                })
+                .finally(() => {
+                    submitButton.disabled = false;
+                });
+        });
+    </script>
+</body>
+</html>
